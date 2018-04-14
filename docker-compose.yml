@@ -1,0 +1,8 @@
+version: '3'
+
+services:
+  mybills.api:
+    image: mybills.api
+    build:
+      context: .
+      dockerfile: MyBills.API/Dockerfile

@@ -36,6 +36,9 @@ namespace MyBills.API
                 c.IncludeXmlComments(basePath + "\\MyBills.API.xml");
             });
 
+            services.AddSingleton<IConfiguration>(Configuration);
+
+            //DI
             services.AddScoped<IBillRepository, BillRepository>();
             services.AddScoped<IBillService, BillService>();
         }
@@ -58,6 +61,8 @@ namespace MyBills.API
             });
 
             app.UseMvc();
+
+           
         }
     }
 }

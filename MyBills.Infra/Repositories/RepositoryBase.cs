@@ -1,4 +1,5 @@
-﻿using MongoDB.Bson;
+﻿using Microsoft.Extensions.Configuration;
+using MongoDB.Bson;
 using MongoDB.Driver.Builders;
 using MyBills.Domain.Repositories;
 using MyBills.Infra.IoC;
@@ -15,12 +16,15 @@ namespace MyBills.Infra.Repositories
 
     public class RepositoryBase<TEntity> : IDisposable, IRepositoryBase<TEntity> where TEntity : class
     {
-        DataAccess dataAccess = new DataAccess();
+        private IConfiguration _configuration;
+
+        DataAccess dataAccess;
 
         private readonly string _collection;
 
-        public RepositoryBase(string collection)
+        public RepositoryBase(string collection, IConfiguration configuration)
         {
+            dataAccess = new DataAccess(configuration);
             _collection = collection;
         }
 

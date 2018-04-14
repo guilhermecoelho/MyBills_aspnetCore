@@ -1,4 +1,6 @@
-﻿using MongoDB.Driver;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
+using MongoDB.Driver;
 
 namespace MyBills.Infra.IoC
 {
@@ -8,11 +10,11 @@ namespace MyBills.Infra.IoC
         public MongoServer server;
         public MongoDatabase db;
 
-        public DataAccess()
+        public DataAccess(IConfiguration configuration)
         {
-            client = new MongoClient("mongodb://localhost:27017");
+            client = new MongoClient(configuration["DefaultConnection:Url"]);
             server = client.GetServer();
-            db = server.GetDatabase("MyBillsDB");
+            db = server.GetDatabase(configuration["DefaultConnection:DataBase"]);
         }
     }
 }

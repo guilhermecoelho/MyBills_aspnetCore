@@ -10,6 +10,7 @@ using MyBills.Domain.Entities;
 using MyBills.API.Response;
 using MyBills.API.VIewModels;
 using MyBills.API.Helper;
+using Microsoft.Extensions.Configuration;
 
 namespace MyBills.API.Controllers
 {
@@ -17,13 +18,16 @@ namespace MyBills.API.Controllers
     [Route("api/[controller]")]
     public class BillsController : Controller
     {
+        private IConfiguration _configuration;
+
         private readonly IMapper _mapper;
         private readonly IBillService _billService;
 
-        public BillsController(IBillService billService, IMapper mapper)
+        public BillsController(IBillService billService, IMapper mapper, IConfiguration configuration)
         {
             this._mapper = mapper;
             this._billService = billService;
+            this._configuration = configuration;
         }
 
         // GET: api/Bills
